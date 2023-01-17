@@ -1,8 +1,6 @@
-/**
+/*
  * Roll20: https://app.roll20.net/users/6205674/angelo
  * Github: https://github.com/ocangelo/roll20/
- *
- * @format
  */
 
 /*jshint -W069 */
@@ -92,6 +90,7 @@ const WS_API = {
     NPC_DATA: {
       HP: "hp",
       SPEED: "npc_speed",
+      HP_TEMP: "hp_temp",
       bar1: "hp",
       bar2: "npc_ac",
       bar3: "npc_speed",
@@ -684,37 +683,21 @@ var WildShape =
         const shortStatName = STATS.SHORT_NAMES[statIndex];
 
         // copy stat
-        let attr = findObjs({
-          _type: "attribute",
-          name: statName,
-          _characterid: targetId,
-        })[0];
+        let attr = findObjs({ _type: "attribute", name: statName, _characterid: targetId })[0];
         stats[statName] = attr ? Number(attr.get("current")) : 0;
 
         // copy modifier
-        attr = findObjs({
-          _type: "attribute",
-          name: statName + SUFFIX_MOD,
-          _characterid: targetId,
-        })[0];
+        attr = findObjs({ _type: "attribute", name: statName + SUFFIX_MOD, _characterid: targetId })[0];
         let mod = attr ? Number(attr.get("current")) : 0;
         mods[statName] = mod;
 
         // copy save
-        attr = findObjs({
-          _type: "attribute",
-          name: PREFIX + (isNpc ? shortStatName : statName) + SUFFIX_SAVE,
-          _characterid: targetId,
-        })[0];
+        attr = findObjs({ _type: "attribute", name: PREFIX + (isNpc ? shortStatName : statName) + SUFFIX_SAVE, _characterid: targetId })[0];
         saves[statName] = attr && attr.get("current") != "" ? Number(attr.get("current")) : mod;
 
         // copy skills
         _.each(STATS.SKILLS[statName], (skillName) => {
-          attr = findObjs({
-            _type: "attribute",
-            name: PREFIX + skillName,
-            _characterid: targetId,
-          })[0];
+          attr = findObjs({ _type: "attribute", name: PREFIX + skillName, _characterid: targetId })[0];
           skills[skillName] = attr && attr.get("current") != "" ? Number(attr.get("current")) : mod;
         });
       }
@@ -745,11 +728,12 @@ var WildShape =
         let attrName = charDataRoot[fieldId];
 
         if (attrName && attrName !== "") {
-          let obj = findObjs({
-            type: "attribute",
-            characterid: targetCharacterId,
-            name: attrName,
-          })[0];
+          // to ensure we have it on an npc.
+          if (attrName === "hp_temp") {
+            myGetAttrByName(targetCharacterId, "hp_temp");
+          }
+
+          let obj = findObjs({ type: "attribute", characterid: targetCharacterId, name: attrName })[0];
           if (obj) {
             barData[fieldId] = {};
             barData[fieldId].id = obj.id;
@@ -830,10 +814,7 @@ var WildShape =
 
       if (target) {
         const targetCharacterId = target[WS_API.FIELDS.SETTINGS][WS_API.FIELDS.ID];
-        const targetCharacter = findObjs({
-          type: "character",
-          id: targetCharacterId,
-        })[0];
+        const targetCharacter = findObjs({ type: "character", id: targetCharacterId })[0];
         if (targetCharacter) {
           return {
             token: tokenObj,
@@ -851,7 +832,6 @@ var WildShape =
 
     async function getTargetCharacterData(shiftData, isTargetNpc, isTargetDefault, resetShiftHP = true) {
       UTILS.debugChat("BUILDING TARGET CHARACTER DATA: START", true);
-
       const config = state[WS_API.STATENAME][WS_API.DATA_CONFIG];
       const shifterSettings = shiftData.shifter[WS_API.FIELDS.SETTINGS];
       const targetData = shiftData.targetShape ? shiftData.targetShape : shifterSettings;
@@ -997,14 +977,10 @@ var WildShape =
 
     const copyDruidProficiency = (profData) => {
       /*
-        You also retain all of your skill and saving throw Proficiencies, in addition to gaining those of the creature.
-        If the creature has the same proficiency as you and the bonus in its stat block is higher than yours, use the creature’s bonus instead of yours.
-        */
-      let shapeStatAttr = findObjs({
-        _type: "attribute",
-        name: profData.shapeStatName,
-        _characterid: profData.shapeId,
-      })[0];
+      You also retain all of your skill and saving throw Proficiencies, in addition to gaining those of the creature.
+      If the creature has the same proficiency as you and the bonus in its stat block is higher than yours, use the creature’s bonus instead of yours.
+      */
+      let shapeStatAttr = findObjs({ _type: "attribute", name: profData.shapeStatName, _characterid: profData.shapeId })[0];
       if (!shapeStatAttr) {
         shapeStatAttr = createObj("attribute", {
           characterid: profData.shapeId,
@@ -1089,11 +1065,7 @@ var WildShape =
       profData.druidId = druidCharacterId;
       profData.shapeId = targetCharacterId;
 
-      let druidPb = findObjs({
-        _type: "attribute",
-        name: STATS.PROF,
-        _characterid: druidCharacterId,
-      })[0];
+      let druidPb = findObjs({ _type: "attribute", name: STATS.PROF, _characterid: druidCharacterId })[0];
       profData.druidPb = druidPb ? Number(druidPb.get("current")) : 0;
       UTILS.debugChat("druid pb: " + profData.druidPb);
 
@@ -1102,11 +1074,7 @@ var WildShape =
         const shortStatName = STATS.SHORT_NAMES[statIndex];
 
         // original stat modifier on target
-        let statMod = findObjs({
-          _type: "attribute",
-          name: statName + WS_API.SETTINGS.STATS.SUFFIX.MOD,
-          _characterid: targetCharacterId,
-        })[0];
+        let statMod = findObjs({ _type: "attribute", name: statName + WS_API.SETTINGS.STATS.SUFFIX.MOD, _characterid: targetCharacterId })[0];
         profData.statMod = statMod ? Number(statMod.get("current")) : 0;
         profData.shapeStatMod = modsCache[statName];
 
@@ -1127,20 +1095,12 @@ var WildShape =
       }
 
       // npc saving/skills flag
-      let npc_attr_flag = findObjs({
-        _type: "attribute",
-        name: "npc_saving_flag",
-        _characterid: targetCharacterId,
-      })[0];
+      let npc_attr_flag = findObjs({ _type: "attribute", name: "npc_saving_flag", _characterid: targetCharacterId })[0];
       if (npc_attr_flag) {
         npc_attr_flag.set("current", 1);
       }
 
-      npc_attr_flag = findObjs({
-        _type: "attribute",
-        name: "npc_skills_flag",
-        _characterid: targetCharacterId,
-      })[0];
+      npc_attr_flag = findObjs({ _type: "attribute", name: "npc_skills_flag", _characterid: targetCharacterId })[0];
       if (npc_attr_flag) {
         npc_attr_flag.set("current", 1);
       }
@@ -1149,6 +1109,7 @@ var WildShape =
     };
 
     async function doShapeShift(shiftData, resetShiftHP = true) {
+      UTILS.chat("doShapeShift()");
       const config = state[WS_API.STATENAME][WS_API.DATA_CONFIG];
       const shifterSettings = shiftData.shifter[WS_API.FIELDS.SETTINGS];
 
@@ -1157,6 +1118,7 @@ var WildShape =
       let wildShapeResource = null;
 
       if (shiftData.targetShape) {
+        UTILS.chat("in shift?");
         // if it's a druid shapeshifting check that we have enough uses of the wildshape resource left
         if (shifterSettings[WS_API.FIELDS.ISDRUID] && !shiftData.ignoreDruidResource) {
           const wsResName = config[WS_API.FIELDS.DRUID_WS_RES];
@@ -1178,12 +1140,8 @@ var WildShape =
             }
           }
         }
-
         shiftData.targetCharacterId = shiftData.targetShape[WS_API.FIELDS.ID];
-        shiftData.targetCharacter = findObjs({
-          type: "character",
-          id: shiftData.targetCharacterId,
-        })[0];
+        shiftData.targetCharacter = findObjs({ type: "character", id: shiftData.targetCharacterId })[0];
         if (!shiftData.targetCharacter) {
           UTILS.chatErrorToPlayer(shiftData.who, "Cannot find target character = " + shiftData.targetShape[WS_API.FIELDS.CHARACTER] + " with id = " + shiftData.targetCharacterId);
           return false;
@@ -1261,10 +1219,7 @@ var WildShape =
       }
 
       if (!isTargetDefault) {
-        shiftData.targetCharacter.set({
-          controlledby: targetData.controlledby,
-          inplayerjournals: targetData.controlledby,
-        });
+        shiftData.targetCharacter.set({ controlledby: targetData.controlledby, inplayerjournals: targetData.controlledby });
       }
 
       shifterSettings[WS_API.FIELDS.CURRENT_SHAPE] = shiftData.targetShapeName;
@@ -1314,16 +1269,10 @@ var WildShape =
 
       shifter[WS_API.FIELDS.SHAPES][shapeId] = shape;
 
-      const shifterCharacter = findObjs({
-        type: "character",
-        id: shifter[WS_API.FIELDS.SETTINGS][WS_API.FIELDS.ID],
-      })[0];
+      const shifterCharacter = findObjs({ type: "character", id: shifter[WS_API.FIELDS.SETTINGS][WS_API.FIELDS.ID] })[0];
       if (shifterCharacter) {
         const shifterControlledBy = shifterCharacter.get("controlledby");
-        shapeCharacter.set({
-          controlledby: shifterControlledBy,
-          inplayerjournals: shifterControlledBy,
-        });
+        shapeCharacter.set({ controlledby: shifterControlledBy, inplayerjournals: shifterControlledBy });
       }
 
       if (doSort) {
@@ -1467,10 +1416,7 @@ var WildShape =
 
     const removeShape = (shape) => {
       if (shape) {
-        const shapeCharacter = findObjs({
-          type: "character",
-          id: shape[WS_API.FIELDS.ID],
-        })[0];
+        const shapeCharacter = findObjs({ type: "character", id: shape[WS_API.FIELDS.ID] })[0];
         if (shapeCharacter) {
           // versions earlier than 1.3 don't have the automatic duplicate, preserve characters
           if (shape[WS_API.FIELDS.ISDUPLICATE]) {
@@ -1501,10 +1447,7 @@ var WildShape =
         } else {
           // delete all shapes
           _.each(shifter[WS_API.FIELDS.SHAPES], (shape) => {
-            const shapeCharacter = findObjs({
-              type: "character",
-              id: shape[WS_API.FIELDS.ID],
-            })[0];
+            const shapeCharacter = findObjs({ type: "character", id: shape[WS_API.FIELDS.ID] })[0];
             if (shapeCharacter) {
               // versions earlier than 1.3 don't have the automatic duplicate, preserve characters
               if (shape[WS_API.FIELDS.ISDUPLICATE]) {
@@ -1587,15 +1530,8 @@ var WildShape =
 
                 const shifterControlledBy = charObj[0].get("controlledby");
                 _.each(shifter[WS_API.FIELDS.SHAPES], (shape) => {
-                  let shapeObj = findObjs({
-                    type: "character",
-                    id: shape[WS_API.FIELDS.ID],
-                  });
-                  if (shapeObj && shapeObj.length == 1)
-                    shapeObj[0].set({
-                      controlledby: shifterControlledBy,
-                      inplayerjournals: shifterControlledBy,
-                    });
+                  let shapeObj = findObjs({ type: "character", id: shape[WS_API.FIELDS.ID] });
+                  if (shapeObj && shapeObj.length == 1) shapeObj[0].set({ controlledby: shifterControlledBy, inplayerjournals: shifterControlledBy });
                 });
               } else {
                 UTILS.chatError("Cannot find character [" + newValue + "] in the journal");
@@ -2179,11 +2115,83 @@ var WildShape =
       }
     }
 
+    function myGetAttrByName(character_id, attribute_name, attribute_default_current, attribute_default_max, value_type) {
+      attribute_default_current = attribute_default_current || "";
+      attribute_default_max = attribute_default_max || "";
+      value_type = value_type || "current";
+
+      var attribute = findObjs(
+        {
+          type: "attribute",
+          characterid: character_id,
+          name: attribute_name,
+        },
+        { caseInsensitive: true }
+      )[0];
+
+      if (!attribute) {
+        attribute = createObj("attribute", {
+          characterid: character_id,
+          name: attribute_name,
+          current: attribute_default_current,
+          max: attribute_default_max,
+        });
+      }
+
+      if (value_type == "max") {
+        return attribute.get("max");
+      } else {
+        return attribute.get("current");
+      }
+    }
+
     async function onAttributeChange(obj, prev) {
-      // log('START: attribute change');
-      // log(obj);
-      // log(state[WS_API.STATENAME]);
-      // log('END: attribute change');
+      let character_id = obj.get("characterid");
+
+      let token = findObjs({ represents: obj.get("characterid") })[0];
+      let shifterData = findShifterData(token, true);
+
+      if (shifterData) {
+        switch (obj.get("name")) {
+          case "hp_temp":
+            let hp_temp_val = parseInt(obj.get("current"), 10) || "";
+
+            if (!Number.isInteger(hp_temp_val) || hp_temp_val === 0) {
+              obj.set("current", "");
+            } else if (hp_temp_val < 0) {
+              let hp = findObjs({ type: "attribute", name: "hp", characterid: character_id })[0];
+              let new_hp = parseInt(hp.get("current"), 10) + hp_temp_val;
+              hp.set("current", new_hp);
+              obj.set("current", "");
+            }
+
+            break;
+
+          case "hp":
+            let hp_val = parseInt(obj.get("current")) || 0;
+            let current_shape = shifterData.shifter[WS_API.FIELDS.SETTINGS][WS_API.FIELDS.CURRENT_SHAPE];
+            uc(current_shape);
+            if (hp_val <= 0 && current_shape && current_shape !== WS_API.SETTINGS.BASE_SHAPE) {
+              shifterData.who = "gm";
+              shifterData.isGM = true;
+              let base_character_id = shifterData.shifter[WS_API.FIELDS.SETTINGS][WS_API.FIELDS.ID];
+              let base_hp = findObjs({ type: "attribute", name: "hp", characterid: base_character_id })[0];
+              let base_hp_val = parseInt(base_hp.get("current"), 10);
+              uc(base_hp_val);
+
+              doShapeShift(shifterData, false).then((ret) => {
+                let new_hp = base_hp_val + hp_val;
+                base_hp.set("current", new_hp);
+              });
+            }
+
+            break;
+        }
+      }
+    }
+
+    function uc(chat) {
+      UTILS.chat(chat);
     }
 
     async function start() {

@@ -1,0 +1,543 @@
+{
+  "config": {
+    "SEP": " ---",
+    "DRUID_WS_RES": "",
+    "MUTE_SHIFT": true,
+    "ENABLE_DEBUG": false,
+    "PC_DATA": {
+      "HP": "hp",
+      "SPEED": "speed",
+      "bar1": "hp",
+      "bar2": "ac",
+      "bar3": "hp_temp",
+      "FORCEROLL_NEVER_WHISPER": true,
+      "FORCEROLL_TOGGLE_ADVANTAGE": true,
+      "FORCEROLL_MANUAL_DAMAGEROLL": true
+    },
+    "NPC_DATA": {
+      "HP": "hp",
+      "SPEED": "npc_speed",
+      "bar1": "hp",
+      "bar2": "npc_ac",
+      "bar3": "hp_temp",
+      "SENSES": "npc_senses",
+      "FORCEROLL_NEVER_WHISPER": false,
+      "FORCEROLL_TOGGLE_ADVANTAGE": false,
+      "FORCEROLL_MANUAL_DAMAGEROLL": false
+    },
+    "SENSES": {
+      "OVERRIDE_SENSES": true,
+      "light_radius": 5,
+      "light_dimradius": -5,
+      "light_otherplayers": false,
+      "light_hassight": true,
+      "light_angle": 360,
+      "light_losangle": 360,
+      "light_multiplier": 1
+    },
+    "VERSION": "1.4.3",
+    "enable_debug": false
+  },
+  "shifters": {
+    "Dwarf Doodid": {
+      "settings": {
+        "ID": "-NLoPnEXNN1Zj2D1jS6H",
+        "character": "Dwarf Doodid",
+        "size": "normal",
+        "isdruid": true,
+        "isnpc": false,
+        "currshape": "Brown Bear",
+        "SENSES": {
+          "light_radius": 5,
+          "light_dimradius": -5,
+          "light_otherplayers": false,
+          "light_hassight": true,
+          "light_angle": 360,
+          "light_losangle": 360,
+          "light_multiplier": 1,
+          "OVERRIDE_SENSES": false
+        }
+      },
+      "shapes": {
+        "Brown Bear": {
+          "ID": "-NLy4nr_SuCrWwvdu840",
+          "character": "Dwarf Doodid - Brown Bear",
+          "size": "auto",
+          "isDuplicate": true,
+          "stats_cache": {
+            "stats": {
+              "strength": 19,
+              "dexterity": 10,
+              "constitution": 16,
+              "intelligence": 2,
+              "wisdom": 13,
+              "charisma": 7
+            },
+            "modifiers": {
+              "strength": 4,
+              "dexterity": 0,
+              "constitution": 3,
+              "intelligence": -4,
+              "wisdom": 1,
+              "charisma": -2
+            },
+            "saves": {
+              "strength": 4,
+              "dexterity": 0,
+              "constitution": 3,
+              "intelligence": -4,
+              "wisdom": 1,
+              "charisma": -2
+            },
+            "skills": {
+              "athletics": 4,
+              "acrobatics": 0,
+              "sleight_of_hand": 0,
+              "stealth": 0,
+              "arcana": -4,
+              "history": -4,
+              "investigation": -4,
+              "nature": -4,
+              "religion": -4,
+              "animal_handling": 1,
+              "insight": 1,
+              "medicine": 1,
+              "perception": 3,
+              "survival": 1,
+              "deception": -2,
+              "intimidation": -2,
+              "performance": -2,
+              "persuasion": -2
+            }
+          },
+          "SENSES": {
+            "light_radius": 5,
+            "light_dimradius": -5,
+            "light_otherplayers": false,
+            "light_hassight": true,
+            "light_angle": 360,
+            "light_losangle": 360,
+            "light_multiplier": 1,
+            "OVERRIDE_SENSES": false
+          }
+        }
+      }
+    },
+    "Elf Doodid": {
+      "settings": {
+        "ID": "-NLoQ7LD3az1KtUsyC9j",
+        "character": "Elf Doodid",
+        "size": "normal",
+        "isdruid": true,
+        "isnpc": false,
+        "currshape": "base",
+        "SENSES": {
+          "light_radius": 5,
+          "light_dimradius": -5,
+          "light_otherplayers": false,
+          "light_hassight": true,
+          "light_angle": 360,
+          "light_losangle": 360,
+          "light_multiplier": 1,
+          "OVERRIDE_SENSES": false
+        }
+      },
+      "shapes": {
+        "Giant Toad": {
+          "ID": "-NLohmdd2qQqQ9q-oeEo",
+          "character": "Elf Doodid - Giant Toad",
+          "size": "auto",
+          "isDuplicate": true,
+          "stats_cache": {
+            "stats": {
+              "strength": 15,
+              "dexterity": 13,
+              "constitution": 13,
+              "intelligence": 2,
+              "wisdom": 10,
+              "charisma": 3
+            },
+            "modifiers": {
+              "strength": 2,
+              "dexterity": 1,
+              "constitution": 1,
+              "intelligence": -4,
+              "wisdom": 0,
+              "charisma": -4
+            },
+            "saves": {
+              "strength": 2,
+              "dexterity": 1,
+              "constitution": 1,
+              "intelligence": -4,
+              "wisdom": 0,
+              "charisma": -4
+            },
+            "skills": {
+              "athletics": 2,
+              "acrobatics": 1,
+              "sleight_of_hand": 1,
+              "stealth": 1,
+              "arcana": -4,
+              "history": -4,
+              "investigation": -4,
+              "nature": -4,
+              "religion": -4,
+              "animal_handling": 0,
+              "insight": 0,
+              "medicine": 0,
+              "perception": 0,
+              "survival": 0,
+              "deception": -4,
+              "intimidation": -4,
+              "performance": -4,
+              "persuasion": -4
+            }
+          },
+          "SENSES": {
+            "light_radius": 5,
+            "light_dimradius": -5,
+            "light_otherplayers": false,
+            "light_hassight": true,
+            "light_angle": 360,
+            "light_losangle": 360,
+            "light_multiplier": 1,
+            "OVERRIDE_SENSES": false
+          }
+        }
+      }
+    },
+    "Halfling Doodid": {
+      "settings": {
+        "ID": "-NLoj7b4Rdb9GxubXnnx",
+        "character": "Halfling Doodid",
+        "size": "normal",
+        "isdruid": true,
+        "isnpc": false,
+        "currshape": "base",
+        "SENSES": {
+          "light_radius": 5,
+          "light_dimradius": -5,
+          "light_otherplayers": false,
+          "light_hassight": true,
+          "light_angle": 360,
+          "light_losangle": 360,
+          "light_multiplier": 1,
+          "OVERRIDE_SENSES": false
+        }
+      },
+      "shapes": {
+        "Brown Bear": {
+          "ID": "-NLxaHuV2Cd7T47av3Gc",
+          "character": "Halfling Doodid - Brown Bear",
+          "size": "auto",
+          "isDuplicate": true,
+          "stats_cache": {
+            "stats": {
+              "strength": 19,
+              "dexterity": 10,
+              "constitution": 16,
+              "intelligence": 2,
+              "wisdom": 13,
+              "charisma": 7
+            },
+            "modifiers": {
+              "strength": 4,
+              "dexterity": 0,
+              "constitution": 3,
+              "intelligence": -4,
+              "wisdom": 1,
+              "charisma": -2
+            },
+            "saves": {
+              "strength": 4,
+              "dexterity": 0,
+              "constitution": 3,
+              "intelligence": -4,
+              "wisdom": 1,
+              "charisma": -2
+            },
+            "skills": {
+              "athletics": 4,
+              "acrobatics": 0,
+              "sleight_of_hand": 0,
+              "stealth": 0,
+              "arcana": -4,
+              "history": -4,
+              "investigation": -4,
+              "nature": -4,
+              "religion": -4,
+              "animal_handling": 1,
+              "insight": 1,
+              "medicine": 1,
+              "perception": 3,
+              "survival": 1,
+              "deception": -2,
+              "intimidation": -2,
+              "performance": -2,
+              "persuasion": -2
+            }
+          },
+          "SENSES": {
+            "light_radius": 5,
+            "light_dimradius": -5,
+            "light_otherplayers": false,
+            "light_hassight": true,
+            "light_angle": 360,
+            "light_losangle": 360,
+            "light_multiplier": 1,
+            "OVERRIDE_SENSES": false
+          }
+        },
+        "Giant Octopus": {
+          "ID": "-NLxaHeEWNhz48l_6tSr",
+          "character": "Halfling Doodid - Giant Octopus",
+          "size": "auto",
+          "isDuplicate": true,
+          "stats_cache": {
+            "stats": {
+              "strength": 17,
+              "dexterity": 13,
+              "constitution": 13,
+              "intelligence": 4,
+              "wisdom": 10,
+              "charisma": 4
+            },
+            "modifiers": {
+              "strength": 3,
+              "dexterity": 1,
+              "constitution": 1,
+              "intelligence": -3,
+              "wisdom": 0,
+              "charisma": -3
+            },
+            "saves": {
+              "strength": 3,
+              "dexterity": 1,
+              "constitution": 1,
+              "intelligence": -3,
+              "wisdom": 0,
+              "charisma": -3
+            },
+            "skills": {
+              "athletics": 3,
+              "acrobatics": 1,
+              "sleight_of_hand": 1,
+              "stealth": 5,
+              "arcana": -3,
+              "history": -3,
+              "investigation": -3,
+              "nature": -3,
+              "religion": -3,
+              "animal_handling": 0,
+              "insight": 0,
+              "medicine": 0,
+              "perception": 4,
+              "survival": 0,
+              "deception": -3,
+              "intimidation": -3,
+              "performance": -3,
+              "persuasion": -3
+            }
+          },
+          "SENSES": {
+            "light_radius": 5,
+            "light_dimradius": -5,
+            "light_otherplayers": false,
+            "light_hassight": true,
+            "light_angle": 360,
+            "light_losangle": 360,
+            "light_multiplier": 1,
+            "OVERRIDE_SENSES": false
+          }
+        },
+        "Giant Spider": {
+          "ID": "-NLxYiB4-lmB20UuBEhw",
+          "character": "Halfling Doodid - Giant Spider",
+          "size": "auto",
+          "isDuplicate": true,
+          "stats_cache": {
+            "stats": {
+              "strength": 14,
+              "dexterity": 16,
+              "constitution": 12,
+              "intelligence": 2,
+              "wisdom": 11,
+              "charisma": 4
+            },
+            "modifiers": {
+              "strength": 2,
+              "dexterity": 3,
+              "constitution": 1,
+              "intelligence": -4,
+              "wisdom": 0,
+              "charisma": -3
+            },
+            "saves": {
+              "strength": 2,
+              "dexterity": 3,
+              "constitution": 1,
+              "intelligence": -4,
+              "wisdom": 0,
+              "charisma": -3
+            },
+            "skills": {
+              "athletics": 2,
+              "acrobatics": 3,
+              "sleight_of_hand": 3,
+              "stealth": 7,
+              "arcana": -4,
+              "history": -4,
+              "investigation": -4,
+              "nature": -4,
+              "religion": -4,
+              "animal_handling": 0,
+              "insight": 0,
+              "medicine": 0,
+              "perception": 0,
+              "survival": 0,
+              "deception": -3,
+              "intimidation": -3,
+              "performance": -3,
+              "persuasion": -3
+            }
+          },
+          "SENSES": {
+            "light_radius": 5,
+            "light_dimradius": -5,
+            "light_otherplayers": false,
+            "light_hassight": true,
+            "light_angle": 360,
+            "light_losangle": 360,
+            "light_multiplier": 1,
+            "OVERRIDE_SENSES": false
+          }
+        },
+        "Giant Toad": {
+          "ID": "-NLxaHVpqaKfaD5eH2oa",
+          "character": "Halfling Doodid - Giant Toad",
+          "size": "auto",
+          "isDuplicate": true,
+          "stats_cache": {
+            "stats": {
+              "strength": 15,
+              "dexterity": 13,
+              "constitution": 13,
+              "intelligence": 2,
+              "wisdom": 10,
+              "charisma": 3
+            },
+            "modifiers": {
+              "strength": 2,
+              "dexterity": 1,
+              "constitution": 1,
+              "intelligence": -4,
+              "wisdom": 0,
+              "charisma": -4
+            },
+            "saves": {
+              "strength": 2,
+              "dexterity": 1,
+              "constitution": 1,
+              "intelligence": -4,
+              "wisdom": 0,
+              "charisma": -4
+            },
+            "skills": {
+              "athletics": 2,
+              "acrobatics": 1,
+              "sleight_of_hand": 1,
+              "stealth": 1,
+              "arcana": -4,
+              "history": -4,
+              "investigation": -4,
+              "nature": -4,
+              "religion": -4,
+              "animal_handling": 0,
+              "insight": 0,
+              "medicine": 0,
+              "perception": 0,
+              "survival": 0,
+              "deception": -4,
+              "intimidation": -4,
+              "performance": -4,
+              "persuasion": -4
+            }
+          },
+          "SENSES": {
+            "light_radius": 5,
+            "light_dimradius": -5,
+            "light_otherplayers": false,
+            "light_hassight": true,
+            "light_angle": 360,
+            "light_losangle": 360,
+            "light_multiplier": 1,
+            "OVERRIDE_SENSES": false
+          }
+        },
+        "Panther": {
+          "ID": "-NLxToLWePSuUQiA26bB",
+          "character": "Halfling Doodid - Panther",
+          "size": "auto",
+          "isDuplicate": true,
+          "stats_cache": {
+            "stats": {
+              "strength": 14,
+              "dexterity": 15,
+              "constitution": 10,
+              "intelligence": 3,
+              "wisdom": 14,
+              "charisma": 7
+            },
+            "modifiers": {
+              "strength": 2,
+              "dexterity": 2,
+              "constitution": 0,
+              "intelligence": -4,
+              "wisdom": 2,
+              "charisma": -2
+            },
+            "saves": {
+              "strength": 2,
+              "dexterity": 2,
+              "constitution": 0,
+              "intelligence": -4,
+              "wisdom": 2,
+              "charisma": -2
+            },
+            "skills": {
+              "athletics": 2,
+              "acrobatics": 2,
+              "sleight_of_hand": 2,
+              "stealth": 6,
+              "arcana": -4,
+              "history": -4,
+              "investigation": -4,
+              "nature": -4,
+              "religion": -4,
+              "animal_handling": 2,
+              "insight": 2,
+              "medicine": 2,
+              "perception": 4,
+              "survival": 2,
+              "deception": -2,
+              "intimidation": -2,
+              "performance": -2,
+              "persuasion": -2
+            }
+          },
+          "SENSES": {
+            "light_radius": 5,
+            "light_dimradius": -5,
+            "light_otherplayers": false,
+            "light_hassight": true,
+            "light_angle": 360,
+            "light_losangle": 360,
+            "light_multiplier": 1,
+            "OVERRIDE_SENSES": false
+          }
+        }
+      }
+    }
+  }
+}
